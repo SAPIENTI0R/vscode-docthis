@@ -9,7 +9,7 @@
 
 ## Description
 
-"Document This" is a Visual Studio Code extension that automatically generates detailed JSDoc comments for both TypeScript and JavaScript files.
+"Document This" is a Visual Studio Code extension that automatically generates detailed JSDoc comments for both TypeScript and JavaScript files. It also supports extracting and documenting JavaScript inside `<script>` tags in `.html`, `.vue`, and `.njk` (Nunjucks) files!
 
  ![Demo showing the extension generating documentation on a class and the classes constructor method](images/demo.gif)
 

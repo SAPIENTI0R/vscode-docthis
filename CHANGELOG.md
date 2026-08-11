@@ -1,3 +1,7 @@
+### 0.9.0
+- Add support for generating JSDoc in HTML and Nunjucks (`.njk`) files' script tags.
+- Update internal dependencies.
+
 ### 0.8.1
 - Add docthis.returnsTag. If true (default) add @returns in the comment, else add @return.
 

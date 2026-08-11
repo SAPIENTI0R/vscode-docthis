@@ -178,9 +178,53 @@ export class Documenter implements vs.Disposable {
         editor.insertSnippet(sb.toCommentValue(), range);
     }
 
+    private _extractJS(text: string) {
+        let result = "";
+        let inScript = false;
+        let i = 0;
+        while (i < text.length) {
+            if (!inScript) {
+                let scriptStart = text.indexOf("<script", i);
+                if (scriptStart === -1) {
+                    result += text.substring(i).replace(/[^\r\n]/g, " ");
+                    break;
+                }
+                result += text.substring(i, scriptStart).replace(/[^\r\n]/g, " ");
+                i = scriptStart;
+
+                let scriptTagEnd = text.indexOf(">", i);
+                if (scriptTagEnd === -1) {
+                    result += text.substring(i).replace(/[^\r\n]/g, " ");
+                    break;
+                }
+                result += text.substring(i, scriptTagEnd + 1).replace(/[^\r\n]/g, " ");
+                i = scriptTagEnd + 1;
+                inScript = true;
+            } else {
+                let scriptEnd = text.indexOf("</script>", i);
+                if (scriptEnd === -1) {
+                    result += text.substring(i);
+                    break;
+                }
+                result += text.substring(i, scriptEnd);
+                i = scriptEnd;
+
+                result += text.substring(i, i + 9).replace(/[^\r\n]/g, " ");
+                i += 9;
+                inScript = false;
+            }
+        }
+        return result;
+    }
+
     private _getSourceFile(document: vs.TextDocument) {
-        const fileText = document.getText();
+        let fileText = document.getText();
         const canonicalFileName = utils.getDocumentFileName(document);
+
+        if (canonicalFileName.endsWith(".vue.js") || canonicalFileName.endsWith(".html.js") || canonicalFileName.endsWith(".njk.js")) {
+            fileText = this._extractJS(fileText);
+        }
+
         this._languageServiceHost.updateCurrentFile(
             canonicalFileName,
             fileText
@@ -192,7 +236,7 @@ export class Documenter implements vs.Disposable {
             .getProgram()
             .getSourceFile(canonicalFileName);
 
-        const newText = document.getText();
+        const newText = fileText;
         sourceFile.update(newText, <ts.TextChangeRange>{
             newLength: newText.length,
             span: <ts.TextSpan>{

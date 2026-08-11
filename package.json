@@ -2,8 +2,8 @@
     "name": "docthis",
     "displayName": "Document This",
     "description": "Automatically generates detailed JSDoc comments in TypeScript and JavaScript files.",
-    "version": "0.8.2",
-    "publisher": "oouo-diogo-perdigao",
+    "version": "0.9.0",
+    "publisher": "SAPIENTI0R",
     "icon": "images/icon.png",
     "galleryBanner": {
         "color": "#252627",
@@ -14,6 +14,10 @@
         "url": "https://github.com/joelday"
     },
     "contributors": [
+        {
+            "name": "Ethan Morrow",
+            "url": "https://github.com/SAPIENTI0R"
+        },
         {
             "name": "Diogo Passos Perdigão Britto",
             "email": "diogopbritto@gmail.com",
@@ -186,12 +190,12 @@
     "devDependencies": {
         "@types/mocha": "^5.2.7",
         "@types/node": "^10.17.26",
-        "@types/vscode": "^1.22.0",
+        "@types/vscode": "1.22.0",
         "tslint": "^5.20.1"
     },
     "dependencies": {
         "dateformat": "^3.0.3",
-        "typescript": "^2.9.2"
+        "typescript": "^3.9.7"
     },
     "bugs": {
         "url": "https://github.com/oouo-diogo-perdigao/vscode-docthis/issues"

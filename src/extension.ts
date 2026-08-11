@@ -9,7 +9,9 @@ const languages = [
     "typescript",
     "vue",
     "javascriptreact",
-    "typescriptreact"
+    "typescriptreact",
+    "html",
+    "njk"
 ];
 
 let documenter: Documenter;
@@ -21,13 +23,14 @@ function lazyInitializeDocumenter() {
 }
 
 function languageIsSupported(document: vs.TextDocument) {
+    const ext = path.extname(document.fileName);
     return (languages.findIndex(l => document.languageId === l) !== -1 ||
-        path.extname(document.fileName) === ".vue");
+        ext === ".vue" || ext === ".html" || ext === ".njk");
 }
 
 function verifyLanguageSupport(document: vs.TextDocument, commandName: string) {
     if (!languageIsSupported(document)) {
-        vs.window.showWarningMessage(`Sorry! '${commandName}' currently only supports JavaScript and TypeScript.`);
+        vs.window.showWarningMessage(`Sorry! '${commandName}' currently only supports JavaScript, TypeScript, Vue, HTML, and Nunjucks.`);
         return false;
     }
 
@@ -73,7 +76,12 @@ class DocThisCompletionItem extends CompletionItem {
 }
 
 export function activate(context: vs.ExtensionContext): void {
-    const languageEntries = languages.map(l => ({ scheme: "file", language: l }));
+    const languageEntries: vs.DocumentFilter[] = [
+        ...languages.map(l => ({ scheme: "file", language: l })),
+        { scheme: "file", pattern: "**/*.html" },
+        { scheme: "file", pattern: "**/*.njk" },
+        { scheme: "file", pattern: "**/*.vue" }
+    ];
 
     context.subscriptions.push(vs.languages.registerCompletionItemProvider(
         languageEntries,
