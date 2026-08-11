@@ -1,17 +1,13 @@
 # Document This
 
----
-
-[Download from Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=oouo-diogo-perdigao.docthis)
-[![Paypal Donations](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=GG4X8R7UTV3AN&source=url)
-
----
-
 ## Description
 
-"Document This" is a Visual Studio Code extension that automatically generates detailed JSDoc comments for both TypeScript and JavaScript files. It also supports extracting and documenting JavaScript inside `<script>` tags in `.html`, `.vue`, and `.njk` (Nunjucks) files!
+> This is a fork of [Document This](https://marketplace.visualstudio.com/items?itemName=oouo-diogo-perdigao.docthis) by Diogo Britto.  
+> This fork adds support for HTML and NJK files to the extension, allowing you to generate JSDoc comments for JavaScript code inside `<script>` tags in .html and .njk files.
 
- ![Demo showing the extension generating documentation on a class and the classes constructor method](images/demo.gif)
+"Document This" is a Visual Studio Code extension that automatically generates detailed JSDoc comments for both TypeScript and JavaScript files.
+
+![Demo showing the extension generating documentation on a class and the classes constructor method](images/demo.gif)
 
 ---
 
